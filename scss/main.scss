@@ -1,0 +1,173 @@
+@use "reset";
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap");
+
+$white: hsl(0, 0%, 100%);
+$softBlue: hsl(215, 51%, 70%);
+$cyan: hsl(178, 100%, 50%);
+$veryDarkBlueMainBG: hsl(217, 54%, 11%);
+$veryDarkBlueCardBG: hsl(216, 50%, 16%);
+$veryDarkBlueLine: hsl(215, 32%, 27%);
+$fontParagraph: 18px;
+
+body {
+  font-family: "Outfit", sans-serif;
+  background-color: $veryDarkBlueMainBG;
+}
+
+.img-zoom {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  background-color: rgba($color: #000000, $alpha: .6);
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity .3s ease-in-out;
+  .image-zoom {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 30%;
+    max-height: 100%;
+    border-radius: 8px;
+    @media screen and (max-width: 500px) {
+      max-width: 90%;
+    }
+  }
+  button{
+    position: absolute;
+    color: $softBlue;
+    font-size: 20px;
+    background-color: $veryDarkBlueCardBG;
+    padding: 5px 20px;
+    border-radius: 30px;
+    width: 200px;
+    top: 85%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    color: $white;
+    border: none;
+    transition: background .2s ease-in;
+    &:hover{
+      background-color: $white;
+      color: $veryDarkBlueCardBG;
+    }
+    &:active{
+      background-color: $veryDarkBlueCardBG;
+      color: $white;
+    }
+  }
+}
+
+.card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: $veryDarkBlueCardBG;
+  padding: 20px 20px 26px;
+  border-radius: 10px;
+  box-shadow: -10px -10px 30px rgba($color: #000000, $alpha: 0.2),
+    10px 10px 30px rgba($color: #000000, $alpha: 0.6);
+  .card-image {
+    text-align: center;
+    position: relative;
+    .card-image-content {
+      max-width: 300px;
+      border-radius: 8px;
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background-image: url(../assets/images/icon-view.svg);
+      background-repeat: no-repeat;
+      background-position: center;
+      border-radius: 8px;
+      background-color: rgba($color: $cyan, $alpha: 0.5);
+      opacity: 0;
+      transition: all 0.6s ease-out;
+    }
+    &:hover {
+      &::after {
+        opacity: 1;
+        cursor: pointer;
+      }
+    }
+  }
+  .card-text {
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    border-bottom: 1px solid $veryDarkBlueLine;
+    margin-bottom: 18px;
+    .card-text-top {
+      .card-title {
+        font-weight: 600;
+        color: $white;
+        font-size: 22px;
+        line-height: 70px;
+        transition: color 0.2s linear;
+        &:hover {
+          color: $cyan;
+          cursor: pointer;
+        }
+      }
+      .card-description {
+        font-size: $fontParagraph;
+        color: $softBlue;
+        line-height: 28px;
+      }
+    }
+    .card-text-bottom {
+      display: flex;
+      justify-content: space-between;
+      padding: 26px 0;
+      .card-value {
+        color: $cyan;
+      }
+      .card-time {
+        color: $softBlue;
+      }
+      .card-value,
+      .card-time {
+        img {
+          margin-right: 5px;
+        }
+        display: inline-flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-content: center;
+        align-items: center;
+        font-weight: 300;
+      }
+    }
+  }
+  .card-footer {
+    display: flex;
+    align-items: center;
+    img {
+      max-width: 25px;
+      border: 1px solid $white;
+      border-radius: 50%;
+      margin-right: 15px;
+    }
+    .card-creator {
+      color: $softBlue;
+      .card-name-creator {
+        color: $white;
+        transition: color 0.2s linear;
+        &:hover {
+          color: $cyan;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
